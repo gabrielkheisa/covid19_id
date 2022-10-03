@@ -1,4 +1,4 @@
-<h1> Selenium get COVID Data </h1>
+<h1> Selenium get COVID Data (Indonesia)</h1>
 <p>Get data from https://kawalcovid19.id/</p>
 <br>
 <p>Example:<br></p>
