@@ -8,6 +8,8 @@ import base64
 
 from selenium.webdriver.chrome.options import Options
 
+key = "KEY"
+
 while(1):
     now = datetime.now()
     dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
@@ -15,7 +17,7 @@ while(1):
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
-    browser = webdriver.Chrome('CHROMEDRIVER_PATH', chrome_options=options) 
+    browser = webdriver.Chrome('WEBDRIVER_PATH', chrome_options=options) 
 
     browser.delete_all_cookies()
     browser.get("https://kawalcovid19.id/")
@@ -29,7 +31,7 @@ while(1):
     meninggal = browser.find_element_by_class_name("kcov-1alrthh-Text").get_attribute('textContent')
     last_update = browser.find_element_by_class_name("kcov-s88wow-Text").get_attribute('textContent')
 
-    payload = terkonfirmasi + "," + perawatan + "," + sembuh + "," + meninggal + "," + last_update + "," + dt_string + " GMT+7"
+    payload = terkonfirmasi + "," + perawatan + "," + sembuh + "," + meninggal + "," + last_update + "," + dt_string + " GMT+7" + "," + key
 
     print(payload)
 
@@ -37,7 +39,7 @@ while(1):
 
     print(payload_encoded.decode('ascii'))
 
-    response = requests.get('YOUR_URL'+str(payload_encoded.decode('ascii')))
+    response = requests.get('https://api.gabrielkheisa.xyz/covid19_id/index.php?q='+str(payload_encoded.decode('ascii')))
 
     browser.quit()
     print("Sleep for 300 seconds")
